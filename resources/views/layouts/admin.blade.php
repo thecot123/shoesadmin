@@ -30,7 +30,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
 
             <div class="sidebar-brand-text mx-3">ADMIN GROUP <sup>4</sup></div>
         </a>
@@ -96,7 +96,28 @@
             </a>
         </li>
 
-         <!--Create - About -->
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">
+            {{ __('Photo') }}
+        </div>
+        <li class="nav-item {{ Nav::isRoute('images') }}">
+            <a class="nav-link" href="{{ route('images') }}">
+            <i class="fab fa-product-hunt"></i>
+                <span>{{ __('Productimage') }}</span>
+            </a>
+        </li>
+        <li class="nav-item {{ Nav::isRoute('banners') }}">
+            <a class="nav-link" href="{{ route('banners') }}">
+            <i class="fab fa-product-hunt"></i>
+                <span>{{ __('Banner') }}</span>
+            </a>
+        </li>
+        <li class="nav-item {{ Nav::isRoute('sliders') }}">
+            <a class="nav-link" href="{{ route('sliders') }}">
+            <i class="fab fa-product-hunt"></i>
+                <span>{{ __('Slider') }}</span>
+            </a>
+        </li>
 
 
         <!-- Divider -->

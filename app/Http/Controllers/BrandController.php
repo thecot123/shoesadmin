@@ -36,6 +36,11 @@ class BrandController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
+
+        ], [
+            'name.required' => 'Vui lòng nhập tên sản phẩm.',
+            'slug.required' => 'Vui lòng nhập slug sản phẩm.',
+
         ]);
 
         $brand = Brand::create([
@@ -70,6 +75,15 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+
+        ], [
+            'name.required' => 'Vui lòng nhập tên sản phẩm.',
+            'slug.required' => 'Vui lòng nhập slug sản phẩm.',
+
+        ]);
         $brand =Brand::findOrFail($id);
             $brand->update($request->all());
             return redirect('brands');
@@ -82,7 +96,7 @@ class BrandController extends Controller
     {
         $brand =Brand::findOrFail($id);
          $brand->delete();
-         return redirect('brands');
+         return redirect('brands')->with('success', 'Xóa Brand thành công!');;
         }
 
 }

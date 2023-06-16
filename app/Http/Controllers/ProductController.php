@@ -48,10 +48,17 @@ class ProductController extends Controller
             'description' => 'required|string|max:1000',
             'price' => 'required|integer',
             'discount' => 'required|integer',
-            'quantity' => 'required|integer',
-            'size' => 'required|integer',
+            'featured' => 'required|string|max:255',
+        ], [
+            'name.required' => 'Vui lòng nhập tên sản phẩm.',
+            'slug.required' => 'Vui lòng nhập slug sản phẩm.',
+            'description.required' => 'Vui lòng nhập mô tả sản phẩm.',
+            'price.required' => 'Vui lòng nhập giá sản phẩm.',
+            'price.integer' => 'Giá sản phẩm phải là một số nguyên.',
+            'discount.required' => 'Vui lòng nhập giảm giá sản phẩm.',
+            'discount.integer' => 'Giảm giá sản phẩm phải là một số nguyên.',
+            'featured.required' => 'Vui lòng nhập thuộc tính nổi bật sản phẩm.',
         ]);
-
         $product = Product::create([
             'name' => $request->name,
             'slug' => $request->slug,
@@ -61,13 +68,14 @@ class ProductController extends Controller
             'discount' => $request->discount,
             'category_id' => $request->category,
             'brand_id' => $request->brand,
+            'featured' => $request->featured,
         ]);
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension();
             if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg') {
-                return view('admin.product.create');
+                return redirect()->back()->withErrors('Định dạng hình ảnh không hợp lệ.');
             }
             $imageName = $file->getClientOriginalName();
             $file->move("images", $imageName);
@@ -76,15 +84,10 @@ class ProductController extends Controller
                 'product_id' => $product->id,
                 'photo' => $imageName,
             ]);
-            $productdeltail = ProductDetail::create([
-                'product_id' => $product->id,
-                'color' => $request->color,
-                'quantity' => $request->quantity,
-                'size' => $request->size,
-            ]);
         }
+        session()->flash('success', 'Sản phẩm đã được lưu thành công.');
 
-        return redirect('/product')->withSuccess('Product created successfully.');
+        return redirect('/product');
     }
 
 
@@ -103,7 +106,8 @@ class ProductController extends Controller
     {
         // Lấy thông tin sản phẩm từ cơ sở dữ liệu
         $product = Product::findOrFail($id);
-        return view('product.edit', compact('product'));
+        $products = Product::all();
+        return view('product.edit', compact('product','products'));
     }
 
 
@@ -115,8 +119,30 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         $product = Product::findOrFail($id);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'price' => 'required|integer',
+            'discount' => 'required|integer',
+            'quantity' => 'required|integer',
+            'size' => 'required|integer',
+
+
+        ],[
+            'name.required' => 'Vui lòng nhập tên sản phẩm.',
+            'slug.required' => 'Vui lòng nhập slug sản phẩm.',
+            'description.required' => 'Vui lòng nhập mô tả sản phẩm.',
+            'price.required' => 'Vui lòng nhập giá sản phẩm.',
+            'price.integer' => 'Giá sản phẩm phải là một số nguyên.',
+            'discount.required' => 'Vui lòng nhập giảm giá sản phẩm.',
+            'discount.integer' => 'Giảm giá sản phẩm phải là một số nguyên.',
+            'quantity.integer' => 'Giảm giá sản phẩm phải là một số nguyên.'
+        ]);
         $product->update($request->all());
+        session()->flash('success', 'Sản phẩm đã được lưu thành công.');
         return redirect()->route('product');
     }
 
@@ -128,7 +154,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         // Xóa bản ghi liên quan từ bảng product_images
-        DB::table('product_images')->where('product_id', $product->id)->delete();
+        DB::table('product_images') ->where('product_id', $product->id)->delete();
 
          // Xóa bản ghi liên quan từ bảng product_images
          DB::table('product_details')->where('product_id', $product->id)->delete();
@@ -140,7 +166,7 @@ class ProductController extends Controller
 
 
 
-        return redirect()->route('product');
+        return redirect()->route('product')->with('success', 'Xóa Product thành công!');;
     }
 
 }

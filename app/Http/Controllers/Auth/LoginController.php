@@ -80,7 +80,7 @@ class LoginController extends Controller
         Auth::login($user);
 
         // Chuyển hướng người dùng tới trang sau khi đăng nhập thành công
-        return redirect('/home');
+        return redirect('/');
     }
 
 }

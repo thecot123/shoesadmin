@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -49,9 +53,25 @@ Route::resource('brand', BrandController::class);
 //category
 Route::get('/categorys', 'CategoryController@index')->name('category');
 Route::resource('category', CategoryController::class);
+
+
+Route::resource('productdetail', ProductDetailController::class);
+
+Route::get('/productimages', 'ProductImageController@index')->name('images');
+Route::resource('productimage', ProductImageController::class);
+
+//banner
+Route::get('/banners', 'BannerController@index')->name('banners');
+Route::resource('banner', BannerController::class);
+
+//slider
+Route::get('/sliders', 'SliderController@index')->name('sliders');
+Route::resource('slider', SliderController::class);
+
 });
 
 // google
 Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
 Route::get('login/google/callback','Auth\LoginController@handleGoogleCallback');
+
 

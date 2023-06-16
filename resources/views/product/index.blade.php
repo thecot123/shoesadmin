@@ -2,6 +2,14 @@
 
 @section('main-content')
 
+@if (session('success'))
+    <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
@@ -16,6 +24,11 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ Route('create') }}">Create Product</a></li>
+            </ol>
+          </div>
+          <div class="col-sm-12">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ Route('productdetail.create') }}">Create ProductDetail</a></li>
             </ol>
           </div>
         </div>
@@ -91,24 +104,22 @@
             </p>
         </td>
         <td>
-            <ul class="list-inline">
-                @foreach($images as $image)
-                @if($image->product_id == $product->id)
-                <li class="list-inline-item">
-                    <img src="{{ asset('images/' . $image->photo) }}" alt="" style="width:70%">
-                </li>
-                @endif
-                @endforeach
-            </ul>
+        <ul class="list-inline">
+    @foreach($images as $image)
+        @if($image->product_id == $product->id)
+            <li class="list-inline-item" style="width=50px;">
+                <img src="{{ asset('images/' . $image->photo) }}" alt="" style="width:100%">
+            </li>
+            @break  <!-- Dừng vòng lặp sau khi lấy hình ảnh đầu tiên -->
+        @endif
+    @endforeach
+</ul>
+
         </td>
         <td class="project-state">
             <span class="badge badge-success">Success</span>
         </td>
         <td class="project-actions text-right">
-            <a class="btn btn-primary btn-sm" href="">
-                <i class="fas fa-folder"></i>
-                View
-            </a>
             <a class="btn btn-info btn-sm" href="{{ Route('edit', $product->id) }}">
                 <i class="fas fa-pencil-alt"></i>
                 Edit

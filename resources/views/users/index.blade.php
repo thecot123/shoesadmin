@@ -3,7 +3,14 @@
 
 @section('main-content')
 
-
+@if (session('success'))
+    <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
   <!-- Main Content -->
    <div id="content">
         <div class="container-fluid">
@@ -40,9 +47,13 @@
         <a class="btn btn-info btn-sm" href="{{ route('users.edit', $item->id) }}">
           <i class="fas fa-pencil-alt"></i> Edit
         </a>
-        <a class="btn btn-danger btn-sm" href="{{ route('users.destroy', $item->id) }}">
-          <i class="fas fa-trash"></i> Delete
-        </a>
+        <form action="{{ route('users.destroy', $item->id) }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this users?')">
+        <i class="fas fa-trash"></i> Delete
+    </button>
+</form>
       </td>
     </tr>
     @endforeach

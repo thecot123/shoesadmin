@@ -35,6 +35,7 @@ class ProfileController extends Controller
         $user->name = $request->input('name');
         $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
+        $user->role = 'admin'; // Thêm dòng này để gán giá trị "admin" cho cột "role"
 
         if (!is_null($request->input('current_password'))) {
             if (Hash::check($request->input('current_password'), $user->password)) {

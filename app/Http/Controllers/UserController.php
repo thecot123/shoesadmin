@@ -82,11 +82,16 @@ class UserController extends Controller
     }
 
 
-    public function destroy(User $user,Request $request)
-    {
-         User::findOrFail($user)->delete();
-        // Redirect hoặc trả về JSON response tùy thuộc vào yêu cầu của bạn
-        return redirect('users.index')->with('success','Xóa người dùng thành công!');
-    }
+    public function destroy(User $user, Request $request)
+{
+    // Tìm người dùng dựa trên đối tượng User được truyền vào
+    $user = User::findOrFail($user->id);
+
+    // Xóa người dùng
+    $user->delete();
+
+    // Redirect hoặc trả về JSON response tùy thuộc vào yêu cầu của bạn
+    return redirect()->route('users.index')->with('success', 'Xóa người dùng thành công!');
+}
 
 }

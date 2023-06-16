@@ -1,7 +1,14 @@
 @extends('layouts.admin')
 
 @section('main-content')
-
+@if (session('success'))
+    <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
@@ -28,7 +35,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Brand</h3>
+          <h3 class="card-title">Category</h3>
         <div class="card-body p-0">
         <table class="table table-striped projects">
   <thead>
@@ -50,9 +57,6 @@
         <span class="badge badge-success">Success</span>
       </td>
       <td class="project-actions text-right">
-        <a class="btn btn-primary btn-sm" href="">
-          <i class="fas fa-folder"></i> View
-        </a>
         <a class="btn btn-info btn-sm" href="{{ Route('category.edit', $item->id) }}">
           <i class="fas fa-pencil-alt"></i> Edit
         </a>

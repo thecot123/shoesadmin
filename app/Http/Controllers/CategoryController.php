@@ -32,6 +32,11 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
+
+        ], [
+            'name.required' => 'Vui lòng nhập tên sản phẩm.',
+            'slug.required' => 'Vui lòng nhập slug sản phẩm.',
+
         ]);
 
         $cate = Category::create([
@@ -40,7 +45,7 @@ class CategoryController extends Controller
         ]);
 
         $cate->save();
-        return redirect('categorys')->withSuccess('Brand create successfully.');
+        return redirect('categorys')->withSuccess('Category create successfully.');
     }
 
     /**
@@ -65,6 +70,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+
+        ], [
+            'name.required' => 'Vui lòng nhập tên sản phẩm.',
+            'slug.required' => 'Vui lòng nhập slug sản phẩm.',
+
+        ]);
+
         $cate = Category::findOrFail($id);
         $cate->update($request->all());
         return redirect('categorys');
@@ -77,7 +92,7 @@ class CategoryController extends Controller
     {
         $cate = Category::findOrFail($id);
         $cate->delete();
-        return redirect('categorys');
+        return redirect('categorys')->with('success', 'Xóa Category thành công!');;
 
     }
 }
