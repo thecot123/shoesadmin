@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('discount')->nullable();
             $table->integer('quantity')->nullable();
             $table->string('featured')->nullable();
+            $table->string('sku')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedBigInteger('brand_id');

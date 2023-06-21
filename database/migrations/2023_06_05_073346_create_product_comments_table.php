@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->string('name');
-            $table->string('message');
-            $table->string('rating');
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('messages')->nullable();
+            $table->string('rating')->nullable();
             $table->timestamps();
         });
     }

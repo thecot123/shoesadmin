@@ -71,31 +71,29 @@
                   </tr>
               </thead>
               <tbody>
-    @foreach($images as $index => $product)
-    <tr>
-        <td>
-            {{ $index + 1 }}
-        </td>
+              @foreach($images->groupBy('product_id') as $productImages)
+<tr>
+    <td>
+        {{ $loop->iteration }}
+    </td>
 
-        <td>
+    <td>
         <div class="horizontal-images">
-        <ul class="list-inline">
-                @foreach($images as $image)
-                @if($image->product_id == $product->id)
+            <ul class="list-inline">
+                @foreach($productImages as $image)
                 <li class="list-inline-item">
                     <img src="{{ asset('images/' . $image->photo) }}" alt="" style="width:20%">
                 </li>
-                @endif
                 @endforeach
             </ul>
-        </td>
         </div>
-        <td class="project-state">
-            <span class="badge badge-success">Success</span>
-        </td>
-
-    <!-- ... -->
+    </td>
+    <td class="project-state">
+        <span class="badge badge-success">Success</span>
+    </td>
+</tr>
 @endforeach
+
 
 
 </td>

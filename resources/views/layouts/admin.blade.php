@@ -118,8 +118,34 @@
                 <span>{{ __('Slider') }}</span>
             </a>
         </li>
-
-
+        <li class="nav-item {{ Nav::isRoute('informs') }}">
+            <a class="nav-link" href="{{ route('informs') }}">
+            <i class="fab fa-product-hunt"></i>
+                <span>{{ __('Inform') }}</span>
+            </a>
+        </li>
+        <li class="nav-item {{ Nav::isRoute('survey.admin') }}">
+            <a class="nav-link" href="{{ route('survey.admin') }}">
+            <i class="fab fa-product-hunt"></i>
+                <span>{{ __('Survey') }}</span>
+            </a>
+        </li>
+        <li class="nav-item {{ Nav::isRoute('coupons') }}">
+            <a class="nav-link" href="{{ route('coupons') }}">
+            <i class="fab fa-product-hunt"></i>
+                <span>{{ __('Coupon') }}</span>
+            </a>
+        </li>
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">
+            {{ __('Cart') }}
+        </div>
+        <li class="nav-item {{ Nav::isRoute('orders') }}">
+            <a class="nav-link" href="{{ route('orders') }}">
+            <i class="fab fa-product-hunt"></i>
+                <span>{{ __('Orders') }}</span>
+            </a>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

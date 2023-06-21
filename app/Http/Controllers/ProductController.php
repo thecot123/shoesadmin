@@ -47,21 +47,21 @@ class ProductController extends Controller
             'slug' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
             'price' => 'required|integer',
-            'discount' => 'required|integer',
+            'sku' => 'required|string|max:255',
             'featured' => 'required|string|max:255',
         ], [
             'name.required' => 'Vui lòng nhập tên sản phẩm.',
             'slug.required' => 'Vui lòng nhập slug sản phẩm.',
+            'sku.required' => 'Vui lòng nhập ma sản phẩm.',
             'description.required' => 'Vui lòng nhập mô tả sản phẩm.',
             'price.required' => 'Vui lòng nhập giá sản phẩm.',
             'price.integer' => 'Giá sản phẩm phải là một số nguyên.',
-            'discount.required' => 'Vui lòng nhập giảm giá sản phẩm.',
-            'discount.integer' => 'Giảm giá sản phẩm phải là một số nguyên.',
             'featured.required' => 'Vui lòng nhập thuộc tính nổi bật sản phẩm.',
         ]);
         $product = Product::create([
             'name' => $request->name,
             'slug' => $request->slug,
+            'sku' => $request->sku,
             'description' => $request->description,
             'content' => $request->content,
             'price' => $request->price,
@@ -106,8 +106,8 @@ class ProductController extends Controller
     {
         // Lấy thông tin sản phẩm từ cơ sở dữ liệu
         $product = Product::findOrFail($id);
-        $products = Product::all();
-        return view('product.edit', compact('product','products'));
+        
+        return view('product.edit', compact('product'));
     }
 
 
@@ -124,22 +124,19 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'price' => 'required|integer',
-            'discount' => 'required|integer',
-            'quantity' => 'required|integer',
-            'size' => 'required|integer',
+          
+           
+            
+           
 
 
         ],[
             'name.required' => 'Vui lòng nhập tên sản phẩm.',
             'slug.required' => 'Vui lòng nhập slug sản phẩm.',
-            'description.required' => 'Vui lòng nhập mô tả sản phẩm.',
-            'price.required' => 'Vui lòng nhập giá sản phẩm.',
-            'price.integer' => 'Giá sản phẩm phải là một số nguyên.',
-            'discount.required' => 'Vui lòng nhập giảm giá sản phẩm.',
-            'discount.integer' => 'Giảm giá sản phẩm phải là một số nguyên.',
-            'quantity.integer' => 'Giảm giá sản phẩm phải là một số nguyên.'
+           
+          
+            
+            
         ]);
         $product->update($request->all());
         session()->flash('success', 'Sản phẩm đã được lưu thành công.');

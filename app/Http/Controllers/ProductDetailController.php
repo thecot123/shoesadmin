@@ -42,15 +42,9 @@ class ProductDetailController extends Controller
     // Ví dụ: Lấy thông tin sản phẩm từ $selectedProductId
     $product = Product::findOrFail($id);
         $request->validate([
-            'quantity' => 'required|integer',
-            'size' => 'required|integer',
-            'color' => 'required|string|max:255',
-        ],[
-            'color.required' => 'Vui lòng nhập màu sản phẩm.',
-            'size.required' => 'Vui lòng nhập size sản phẩm.',
-            'size.integer' => 'size phải là một số nguyên.',
-            'quantity.integer' => 'số lượng phải là một số nguyên.',
-            'quantity.required' => 'Vui lòng nhập số lượng sản phẩm.'
+             
+        
+            
 
         ]);
 

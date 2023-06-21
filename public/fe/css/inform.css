@@ -1,0 +1,40 @@
+.banner-container {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 100px;
+  }
+  
+  .banner {
+    flex: 1;
+    margin-right: 5px;
+  }
+  
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    animation: slideBanner 2s linear infinite;
+  }
+  
+  @keyframes slideBanner {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+
+
+.article {
+    margin-top: 20px;
+}
+
+.date-line {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+    color: gray;
+}

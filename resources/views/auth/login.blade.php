@@ -3,17 +3,16 @@
 @section('main-content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-xl-10 col-lg-12 col-md-9">
-            <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="col-xl-10 col-lg-8 col-md-9">
+            <div class="card o-hidden border border-danger shadow-lg my-5">
                 <div class="card-body p-0">
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                        <div class="col-lg-6">
-                            <div class="p-5">
+                        <div class="col-lg-10 mx-auto"> <!-- Add mx-auto class to center the column -->
+                            <div class="p-5 text-center"> <!-- Add text-center class to center the form -->
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">{{ __('Login') }}</h1>
+                                    <h1 class="h2 text-gray-900 mb-4">D<i style="color:red;">ea</i>lZone Login</h1>  
                                 </div>
-
+ 
                                 @if ($errors->any())
                                     <div class="alert alert-danger border-left-danger" role="alert">
                                         <ul class="pl-4 my-2">
@@ -43,7 +42,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-dark btn-user btn-block">
                                             {{ __('Login') }}
                                         </button>
                                     </div>
@@ -51,22 +50,16 @@
                                     <hr>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-github btn-user btn-block">
-                                            <i class="fab fa-github fa-fw"></i> <a href="{{ url('login/google') }}"></a>
-                                        </button>
+                                        <label for="">You already have a google account? Let use it!</label>
+                                        <a href="{{ route('login.google') }}">
+    <button type="button" class="btn btn-dark btn-user btn-block">
+        <i class="fab fa-google fa-fw"></i> Google Login
+    </button>
+</a>
+
                                     </div>
 
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-twitter btn-user btn-block">
-                                            <i class="fab fa-twitter fa-fw"></i> {{ __('Login with Twitter') }}
-                                        </button>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> {{ __('Login with Facebook') }}
-                                        </button>
-                                    </div>
+                                   
                                 </form>
 
                                 <hr>

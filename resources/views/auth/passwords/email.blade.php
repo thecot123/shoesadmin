@@ -3,15 +3,14 @@
 @section('main-content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-xl-10 col-lg-12 col-md-9">
-            <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="col-xl-10 col-lg-8 col-md-9">
+            <div class="card o-hidden border border-danger shadow-lg my-5">
                 <div class="card-body p-0">
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
-                        <div class="col-lg-6">
-                            <div class="p-5">
+                        <div class="col-lg-10 mx-auto"> <!-- Add mx-auto class to center the column -->
+                            <div class="p-5 text-center"> <!-- Add text-center class to center the form -->
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">{{ __('Reset Password') }}</h1>
+                                    <h1 class="h2 text-gray-900 mb-4">Reset Password</h1>  
                                 </div>
 
                                 @if ($errors->any())
@@ -38,7 +37,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-dark btn-user btn-block">
                                             {{ __('Send Password Reset Link') }}
                                         </button>
                                     </div>
